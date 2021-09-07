@@ -57,6 +57,9 @@ console.log(gruppoStudenti);
 
 for (let i = 0; i < 2; i++)
 {
+    studente = {};    
+    console.log('-oggetto-');
+    console.log(studente);
     for(let proprieta in gruppoStudenti[i])
     {
         studente[proprieta] = prompt('Inserisci un valore nuovo studente');
