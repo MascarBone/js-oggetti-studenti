@@ -12,11 +12,11 @@ let studente = {
 }
 
 /**Ciclo For per visualizzare i nomi delle proprietà */
-for (let proprieta in studente)
-{
-    console.log(proprieta);
-    console.log(studente[proprieta]);
-}
+// for (let proprieta in studente)
+// {
+//     console.log(proprieta);
+//     console.log(studente[proprieta]);
+// }
 
 const gruppoStudenti = [
     {'nome' :   'Luigi' ,cognome:   'Marziello' ,eta    : 55},
@@ -28,14 +28,14 @@ const gruppoStudenti = [
 
 ];
 
-for (let i = 0; i < gruppoStudenti.length; i++)
-{
-    for(let proprieta in gruppoStudenti[i])
-    {
-        console.log(proprieta);
-        console.log(gruppoStudenti[i][proprieta]);
-    }
-}
+// for (let i = 0; i < gruppoStudenti.length; i++)
+// {
+//     for(let proprieta in gruppoStudenti[i])
+//     {
+//         console.log(proprieta);
+//         console.log(gruppoStudenti[i][proprieta]);
+//     }
+// }
 
 let input;
 
@@ -55,3 +55,14 @@ gruppoStudenti.push(studente);
 
 console.log(gruppoStudenti);
 
+for (let i = 0; i < 2; i++)
+{
+    for(let proprieta in gruppoStudenti[i])
+    {
+        studente[proprieta] = prompt('Inserisci un valore nuovo studente');
+        console.log(studente);
+    }
+    gruppoStudenti.push(studente);
+}
+
+console.log(gruppoStudenti);
