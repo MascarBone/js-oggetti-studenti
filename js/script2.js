@@ -27,7 +27,6 @@ console.log(gruppoStudenti);
 const btnAggiungi = document.getElementById('btn-register');
 btnAggiungi.addEventListener('click', function(){
     const dataStudente = [];
-
     const dataMatricole = estraiMatr(gruppoStudenti);
     // console.log(`dataMatricole ${dataMatricole}`);
         
@@ -48,7 +47,7 @@ btnAggiungi.addEventListener('click', function(){
             dataStudente[i] = document.forms.register[i].value;
         }
         console.log (dataStudente);
-
+        studente = {};
         studente.matricola = Number(dataStudente[0]);
         studente.nome = dataStudente[1];
         studente.cognome = dataStudente[2];
@@ -65,7 +64,14 @@ btnAggiungi.addEventListener('click', function(){
 let btnVisualizza = document.getElementById('btn-visualizza');
 btnVisualizza.addEventListener('click', function(){
     // Ciclo per riempire un elenco con solo le matricole
-    document.getElementById('elenco-matricola').innerHTML = "";
+    const elenchi = document.getElementsByClassName('elenco');
+    elenchi.forEach((element) => {
+        element.replaceChildren();
+    });
+    // for (let i = 0; i < elenchi.length; i++)
+    // {
+    //     elenchi[i].replaceChildren();
+    // }
 
     // for (let i = 0; i < gruppoStudenti.length; i++)
     // {
