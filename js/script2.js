@@ -47,7 +47,9 @@ btnAggiungi.addEventListener('click', function(){
             dataStudente[i] = document.forms.register[i].value;
         }
         console.log (dataStudente);
+
         studente = {};
+
         studente.matricola = Number(dataStudente[0]);
         studente.nome = dataStudente[1];
         studente.cognome = dataStudente[2];
@@ -61,25 +63,14 @@ btnAggiungi.addEventListener('click', function(){
 );
 
 // Evento con bottone per visualizzare l'elenco degli studenti
-let btnVisualizza = document.getElementById('btn-visualizza');
+const btnVisualizza = document.getElementById('btn-visualizza');
 btnVisualizza.addEventListener('click', function(){
     // Ciclo per riempire un elenco con solo le matricole
-    const elenchi = document.getElementsByClassName('elenco');
+    const elenchi = [...document.getElementsByClassName('elenco')];
+    console.log(elenchi);
     elenchi.forEach((element) => {
         element.replaceChildren();
     });
-    // for (let i = 0; i < elenchi.length; i++)
-    // {
-    //     elenchi[i].replaceChildren();
-    // }
-
-    // for (let i = 0; i < gruppoStudenti.length; i++)
-    // {
-    //     let newLi = document.createElement('li');
-    //     let newContent = document.createTextNode(gruppoStudenti[i].matricola);
-    //     newLi.appendChild(newContent);
-    //     document.getElementById('elenco-matricola').appendChild(newLi);
-    // }
 
     // Cicli per stampare a schermo per ogni valore all'interno della lista
     // il suo contenuto dell'oggetto
@@ -97,13 +88,39 @@ btnVisualizza.addEventListener('click', function(){
     }
 });
 
-let btnElimina = document.getElementById('btn-elimina');
-btnAggiungi.addEventListener('click', function(){
+const btnElimina = document.getElementById('btn-elimina');
+btnElimina.addEventListener('click', function(){
+
+    const matrForm = Number(document.forms.register[0].value);
+    const dataMatricole = estraiMatr(gruppoStudenti);
+    if ( dataMatricole.includes(matrForm))
+    {     
+        const index = dataMatricole.indexOf(matrForm);
+        // const matrElimina = Number(document.forms.register[0].value);
+        // const dataElimina = estraiMatr(gruppoStudenti);
+        // const indexElimina = dataMatricole.indexOf(matrElimina);
+        
+        gruppoStudenti.splice(index,1);   
+    }else{
+        alert(`La matricola inserita non è prensente nell'elenco`);
+    }
 
 });
-let btnModifica = document.getElementById('btn-modifica');
-btnAggiungi.addEventListener('click', function(){
 
+let btnModifica = document.getElementById('btn-modifica');
+btnModifica.addEventListener('click', function(){
+    const matrForm = Number(document.forms.register[0].value);
+    const dataMatricole = estraiMatr(gruppoStudenti);
+    if ( dataMatricole.includes(matrForm))
+    {
+        const input = document.forms.register;
+        const index = dataMatricole.indexOf(matrForm);
+
+        gruppoStudenti[index].nome = input[1].value;
+        gruppoStudenti[index].cognome = input[2].value;
+        gruppoStudenti[index].eta = Number(input[3].value);
+        
+    }
 });
 
     
