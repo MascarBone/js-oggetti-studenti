@@ -64,16 +64,31 @@ btnAggiungi.addEventListener('click', function(){
 // Evento con bottone per visualizzare l'elenco degli studenti
 let btnVisualizza = document.getElementById('btn-visualizza');
 btnVisualizza.addEventListener('click', function(){
-// Ciclo per riempire un elenco con solo le matricole
-document.getElementById('elenco-matricola').innerHTML = "";
+    // Ciclo per riempire un elenco con solo le matricole
+    document.getElementById('elenco-matricola').innerHTML = "";
 
-for (let i = 0; i < gruppoStudenti.length; i++)
-{
-    let newLi = document.createElement('li');
-    let newContent = document.createTextNode(gruppoStudenti[i].matricola);
-    newLi.appendChild(newContent);
-    document.getElementById('elenco-matricola').appendChild(newLi);
-}
+    // for (let i = 0; i < gruppoStudenti.length; i++)
+    // {
+    //     let newLi = document.createElement('li');
+    //     let newContent = document.createTextNode(gruppoStudenti[i].matricola);
+    //     newLi.appendChild(newContent);
+    //     document.getElementById('elenco-matricola').appendChild(newLi);
+    // }
+
+    // Cicli per stampare a schermo per ogni valore all'interno della lista
+    // il suo contenuto dell'oggetto
+    // Il ciclo for..in stampa una colonna alla volta, iterando per ogni
+    // studente all'interno di gruppoStudenti
+    for (const studente of gruppoStudenti)
+    {
+        for ( const proprieta in studente)
+            {
+                let newLi = document.createElement('li');
+                let newContent = document.createTextNode(studente[proprieta]);
+                newLi.appendChild(newContent);
+                document.getElementById(`elenco-${proprieta}`).appendChild(newLi);
+            }
+    }
 });
 
 let btnElimina = document.getElementById('btn-elimina');
