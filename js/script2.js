@@ -12,7 +12,7 @@ let studente = {
 }
 
 const gruppoStudenti = [
-    {matricola    :   1   ,   nome :   'Luigi' ,cognome:   'Marziello' ,eta    : 55},
+    {matricola    :   1    ,   nome :   'Luigi' ,cognome:   'Marziello' ,eta    : 55},
     {matricola    :   22   ,   nome :   'Luis'  ,cognome:   'Forlka'    ,eta    : 39},
     {matricola    :   31   ,   nome :   'Marlo' ,cognome:   'Julria'    ,eta    : 43},
     {matricola    :   21   ,   nome :   'Quinx' ,cognome:   'Wujara'    ,eta    : 87},
@@ -22,44 +22,42 @@ const gruppoStudenti = [
 ];
 console.log(gruppoStudenti);
 
-// let prova = gruppoStudenti.map(({matricola}) => matricola);
-// console.log(prova);
-
-
-
-// studente = aggiungiStudente();
-// console.log(studente);
-
-// gruppoStudenti.push(studente);
-// console.log(gruppoStudenti);
-
-
-// let dataStudente = [];
-// //Ciclo for per ottenere i valori all'interno del form
-// for (let i = 0; i < document.forms.register.length; i++)
-// {
-//     dataStudente[i] = document.forms.register[i].value;
-// }
-
-// console.log (dataStudente);
 
 //Evento con bottone per aggiungere i valori all'interno del form dentro ad un array;
-let btnAggiungi = document.getElementById('btn-register');
+const btnAggiungi = document.getElementById('btn-register');
 btnAggiungi.addEventListener('click', function(){
-    let dataStudente = [];
-    // studente = {};
-    for (let i = 0; i < document.forms.register.length; i++)
-    {
-        dataStudente[i] = document.forms.register[i].value;
-    }
-    console.log (dataStudente);
+    const dataStudente = [];
 
-    studente.matricola = Number(dataStudente[0]);
-    studente.nome = dataStudente[1];
-    studente.cognome = dataStudente[2];
-    studente.eta = Number(dataStudente[3]);
-    gruppoStudenti.push(studente);
-    console.log(gruppoStudenti);
+    const dataMatricole = estraiMatr(gruppoStudenti);
+    // console.log(`dataMatricole ${dataMatricole}`);
+        
+    const matrForm = Number(document.forms.register[0].value);
+    
+    // console.log(`matrForm ${matrForm}`)
+
+    // Condizione per controllare se il valore inserito nell'input matricole
+    // è già presente nel gruppoStudenti (tramite la ricerca precedente salvato in matrForm)
+    if (dataMatricole.includes(matrForm))
+    {
+        alert(`La matricola è già presente nel sistema, si prega di inserirne un'altra`);
+    }else
+    {
+
+        for (let i = 0; i < document.forms.register.length; i++)
+        {
+            dataStudente[i] = document.forms.register[i].value;
+        }
+        console.log (dataStudente);
+
+        studente.matricola = Number(dataStudente[0]);
+        studente.nome = dataStudente[1];
+        studente.cognome = dataStudente[2];
+        studente.eta = Number(dataStudente[3]);
+        gruppoStudenti.push(studente);
+        console.log(gruppoStudenti);
+        
+        
+    }
 }
 );
 
@@ -93,21 +91,26 @@ btnAggiungi.addEventListener('click', function(){
 
 
 
-/**
- *  Funzione che tramite dei prompt, permette l'inserimento dei valori nell'oggetto studente
- *  @returns Un oggetto studente;
- */
-function aggiungiStudente ()
-{
-    const objTemp = {};
+// /**
+//  *  Funzione che tramite dei prompt, permette l'inserimento dei valori nell'oggetto studente
+//  *  @returns Un oggetto studente;
+//  */
+// function aggiungiStudente ()
+// {
+//     const objTemp = {};
 
-    objTemp['matricola'] = Number(prompt("Inserisci il numero della matricola"));
+//     objTemp['matricola'] = Number(prompt("Inserisci il numero della matricola"));
 
-    objTemp['nome'] = prompt("Inserisci il nome dello Studente");
+//     objTemp['nome'] = prompt("Inserisci il nome dello Studente");
 
-    objTemp['cognome'] = prompt("Inserisci il cognome dello Studente");
+//     objTemp['cognome'] = prompt("Inserisci il cognome dello Studente");
     
-    objTemp['eta'] = Number(prompt("Inserisci l'età dello Studente"));
+//     objTemp['eta'] = Number(prompt("Inserisci l'età dello Studente"));
 
-    return objTemp;
+//     return objTemp;
+// }
+
+/**Funzione per recupera un array con solo il numero delle matricole dalla lista di oggetti */
+function estraiMatr (arr){
+    return arr.map(element => element.matricola);
 }
